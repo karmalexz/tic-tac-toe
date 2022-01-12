@@ -1,45 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Lobster&family=Mochiy+Pop+P+One&display=swap');
-*{
-    background-color: cornsilk;
-    padding: 0;
-    margin:0;
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Lobster&family=Mochiy+Pop+P+One&display=swap");
+*, *::after, *::before {
+    box-sizing: border-box;
+  }
+* {
+  background-color: cornsilk;
+  padding: 0;
+  margin: 0;
 }
-.board{
-    display: grid;
-    border:black;
-    grid-template-columns: auto auto auto;
-    justify-content: center;
-    align-content: center;
-    height: 100vh;
-    margin-top: -10%;
+.board {
+  display: grid;
+  border: black;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+  margin-top: -10%;
 }
-h1{
-    color: blueviolet;
-    text-align: center;
-    margin-top: 20%;
-    font-size: 40px;
-    font-family: "Mochiy Pop P One";
-    cursor:pointer
+h1 {
+  color: blueviolet;
+  text-align: center;
+  margin-top: 20%;
+  font-size: 40px;
+  font-family: "Mochiy Pop P One";
+  cursor: pointer;
 }
-.playerX{
-    color: goldenrod;
+.playerX {
+  color: rgb(35, 142, 237);
 }
-.playerO{
-    color:hotpink;
+.playerO {
+  color: hotpink;
 }
-.display{
-    text-align: center;
-    margin-bottom: -20%;
-    font-size:x-large;
-    font-family: "lobster";
+.display {
+  text-align: center;
+  margin-bottom: -20%;
+  font-size: x-large;
+  font-family: "lobster";
+  /* position: fixed; */
 }
-.cell{
-    border:1px solid black;
-    width: 100px;
-    height: 100px;
-    cursor:pointer;
-    justify-items: center;
-    align-items: center;
+.cell {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  justify-items: center;
+  align-items: center;
 }
 /* .win-page{
     background-color: black;
@@ -47,47 +51,56 @@ h1{
     justify-content: center;
     align-content: center;
 } */
-.cell:nth-child(n+1){
-    border-top: none;
+.cell:nth-child(n + 1) {
+  border-top: none;
 }
-.cell:nth-child(3n+1){
-    border-left: none;
+.cell:nth-child(3n + 1) {
+  border-left: none;
 }
-.cell:nth-child(3n+3){
-    border-right: none;
+.cell:nth-child(3n + 3) {
+  border-right: none;
 }
 .cell:nth-child(7),
 .cell:nth-child(8),
-.cell:nth-child(9){
-    border-bottom: none;
+.cell:nth-child(9) {
+  border-bottom: none;
 }
-#restart-btn{
-    background-color: blueviolet;
-    font-family: "Exo 2";
-    font-size: 20px;
-    border-radius: 8px;
-    border:none;
-    color:white;
-    /* margin:0 auto; */
-    padding: 20px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    
-
+#restart-btn {
+  background-color: blueviolet;
+  font-family: "Exo 2";
+  font-size: 20px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  /* margin:0 auto; */
+  padding: 20px;
+  transition-duration: 0.4s;
+  cursor: pointer;
 }
-.button{
-    margin: 0;
-    position: absolute;
-    top: 90%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+.button {
+  margin: 0;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-#restart-btn:hover{
-    background-color: white;
-    color:black;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+#restart-btn:hover {
+  background-color: white;
+  color: black;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.hide{
-    display: none;
+/* .hide {
+  display: none;
+} */
+win-page{
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+div.playerO,
+div.playerX{
+    cursor:not-allowed;
 }

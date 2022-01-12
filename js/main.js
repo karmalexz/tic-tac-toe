@@ -3,9 +3,15 @@ let cells = $(".cell");
 let displayPlayer = $(".display-player");
 let alert = $(".win-page");
 let restart = $("#restart-btn");
+let xScore = $("#X-score");
+let oScore = $("#O-score");
+let changeToAI=$(".original");
+let changeToOriginal=$(".ai")
 let board = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
 let keepPlaying = true;
+let xScoreUpdate = 0;
+let oScoreUpdate = 0;
 const PLAYERX_WON = "PLAYERX_WON";
 const PLAYERO_WON = "PLAYERO_WON";
 const TIE = "TIE";
@@ -20,6 +26,7 @@ const winCombo = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+
 let result = function () {
   for (let i = 0; i < winCombo.length; i++) {
     let winCondition = winCombo[i];
@@ -39,33 +46,38 @@ let result = function () {
     }
   }
   if (keepPlaying == false) {
+      alert.removeClass('hide');
     if (currentPlayer === "O") {
       console.log("o wins");
+      oScoreUpdate += 1;
       winPage(PLAYERO_WON);
+      oScore.html(oScoreUpdate);
     } else if (currentPlayer === "X") {
       console.log("x wins");
+      xScoreUpdate += 1;
       winPage(PLAYERX_WON);
-    } else {
-      winPage(TIE);
-    }
+      xScore.html(xScoreUpdate);
+    } 
+  }
+  if(!board.includes('')) {
+    winPage(TIE);
   }
 };
 
-let winPage = function (type) {
-    alert.removeClass(".hide");
-  switch (type) {
+let winPage = function (resultType) {
+  switch (resultType) {
     case PLAYERO_WON:
       alert.html(
         `Player <span class="playerO">O</span> Won. Click Restart button to play again`
-      );
-      alert.css({ color: "green", "margin-bottom": "20px" });
+      ).show();
       break;
     case PLAYERX_WON:
-      alert.html("player x wins");
+      alert.html(`Player <span class="playerX">X</span> Won. Click Restart button to play again`).show();
       break;
     case TIE:
-      alert.html(`It's a TIE. Click Restart button to play again`);
+      alert.html(`It's a TIE. Click Restart button to play again`).show();
   }
+  alert.removeClass(".hide");
 };
 
 //this function is to change the player between X and O
@@ -102,26 +114,38 @@ let playGame = function (index, cell) {
 };
 
 cells.each(function (index, cell) {
-  $(cell).click( function () {
-    if($(cell).is(':empty')){
-    playGame(index, cell);}
-    else
-    return;
+  $(cell).click(function () {
+    if ($(cell).is(":empty")) {
+      playGame(index, cell);
+    } else return;
   });
 });
 restart.click(function () {
-    board = ["", "", "", "", "", "", "", "", ""];
-    keepPlaying=true;
-    alert.css("display", "none");
-    if(currentPlayer==='O'){
-        changePlayer();
-    };
-    // console.log(cells)
+  alert.addClass("hide");
+  board = ["", "", "", "", "", "", "", "", ""];
+  keepPlaying = true;
+  alert.css("display", "none");
+  if (currentPlayer === "O") {
+    changePlayer();
+  }
+  // console.log(cells)
+ 
     cells.each(function (index, cell) {
-        console.log("the cell is",cell);
-      $(cell).html("");
-      $(cell).removeClass("playerX");
-      $(cell).removeClass("playerO");
-      console.log(index);
-    });
+    console.log("the cell is", cell);
+    $(cell).html("");
+    $(cell).removeClass("playerX");
+    $(cell).removeClass("playerO");
+    console.log(index);
   });
+});
+
+changeToAI.click(function() {
+    changeToAI.css("display","none");
+    changeToOriginal.removeClass("hide-ai");
+    doNothing();
+})
+changeToOriginal.click(function(){
+    changeToOriginal.addClass("hide-ai");
+    changeToAI.css("display","block")
+
+})

@@ -11,7 +11,12 @@
     <title>Tic Tac Toe</title>
   </head>
   <body>
+    <div class="original">
     <h1>Tic Tac Toe</h1>
+    </div>
+    <div class="ai hide-ai">
+    <h1>Tic Tac Toe AI Mode</h1>
+    </div>
     <section class="display">
       It's <span class="display-player playerX">X</span>'s turn
     </section>
@@ -26,6 +31,10 @@
       <div class="cell"></div>
       <div class="cell"></div>
     </div>
+    <section class="score">
+      <p><span class="playerX">X</span>'s score:<span id="X-score">0</span></p>
+      <p><span class="playerO">O</span>'s score:<span id="O-score">0</span></p>
+    </section>
     <div class="display win-page hide"></div>
     <div class="button">
       <button id="restart-btn">RESTART</button>

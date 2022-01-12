@@ -51,6 +51,28 @@ h1 {
     justify-content: center;
     align-content: center;
 } */
+
+.win-page{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .9);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5rem;
+  flex-direction: column;
+}
+.score{
+    position: absolute;
+    top: 30%;
+    right:35%;
+    font-family:"Exo 2" ; 
+    font-size: 1.3em;   
+    
+}
 .cell:nth-child(n + 1) {
   border-top: none;
 }
@@ -90,17 +112,28 @@ h1 {
   color: black;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-/* .hide {
+.hide {
   display: none;
-} */
-win-page{
-    color: white;
-    font-size: 25px;
-    text-align: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
 }
+.score p{
+    display: inline;
+}
+.score{
+    display: block;
+    margin-left: auto;
+    margin-left: auto;
+}
+
 div.playerO,
 div.playerX{
     cursor:not-allowed;
+}
+.score .playerO{
+    font-family: "lobster";
+}
+.score .playerX{
+    font-family: "lobster";
+}
+.hide-ai{
+    display: none;
 }

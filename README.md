@@ -28,10 +28,13 @@ This project uses the following techs :
 
 ## Preview
 ![This is the homepage, X is always the first player to go, you can click any grid on the board](images/image1.jpg)
+This is the homepage, X is always the first player to go, you can click any grid on the board
 ![This is the AI mode page, you can entre this mode by clicking "Tic Tac Toe", if you click the title again, it will go back to original mode](images/image2.jpg)
+This is the AI mode page, you can entre this mode by clicking "Tic Tac Toe", if you click the title again, it will go back to original mode
 ![This is a playing page, you can also click the RESTART button to restart the game any time, it does not affect your score](images/image3.jpg)
+This is a playing page, you can also click the RESTART button to restart the game any time, it does not affect your score
 ![This is a winning page, it tells you who the winner is or if the game is a tie. you cannot click any cell on the board now, you need to restart a new game by clicking the restart button](images/image4.jpg)
-
+This is a winning page, it tells you who the winner is or if the game is a tie. you cannot click any cell on the board now, you need to restart a new game by clicking the restart button
 ## Wishlist
 - Customize each player's name, and allow user to pick "X" and "O".
 - The AI mode has not been implemented successfully. This will a TODO task. 

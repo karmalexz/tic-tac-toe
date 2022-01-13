@@ -40,6 +40,7 @@ This is a winning page, it tells you who the winner is or if the game is a tie. 
 - The AI mode has not been implemented successfully. This will a TODO task. 
 - Re-style the page to make it prettier. 
 - Add some sound effect.
+- Media Query, to make the game playable on different size of screens. 
 
 
    [here]:https://karmalexz.github.io/tic-tac-toe/

@@ -5,13 +5,14 @@ let alert = $(".win-page");
 let restart = $("#restart-btn");
 let xScore = $("#X-score");
 let oScore = $("#O-score");
-let changeToAI=$(".original");
-let changeToOriginal=$(".ai")
+let changeToAI = $(".original");
+let changeToOriginal = $(".ai");
 let board = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
 let keepPlaying = true;
 let xScoreUpdate = 0;
 let oScoreUpdate = 0;
+let aiCondition = false;
 const PLAYERX_WON = "PLAYERX_WON";
 const PLAYERO_WON = "PLAYERO_WON";
 const TIE = "TIE";
@@ -26,6 +27,27 @@ const winCombo = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+let winPage = function (resultType) {
+  switch (resultType) {
+    case PLAYERO_WON:
+      alert
+        .html(
+          `Player <span class="playerO">O</span> Won. Click Restart button to play again`
+        )
+        .show();
+      break;
+    case PLAYERX_WON:
+      alert
+        .html(
+          `Player <span class="playerX">X</span> Won. Click Restart button to play again`
+        )
+        .show();
+      break;
+    case TIE:
+      alert.html(`It's a TIE. Click Restart button to play again`).show();
+  }
+  alert.removeClass(".hide");
+};
 
 let result = function () {
   for (let i = 0; i < winCombo.length; i++) {
@@ -33,9 +55,6 @@ let result = function () {
     let first = board[winCondition[0]];
     let second = board[winCondition[1]];
     let third = board[winCondition[2]];
-    // console.log("first is:", first);
-    // console.log("second is:", second);
-    // console.log("third is:", third);
     if (first === "" || second === "" || third === "") {
       console.log("keep playing");
       continue;
@@ -46,38 +65,24 @@ let result = function () {
     }
   }
   if (keepPlaying == false) {
-      alert.removeClass('hide');
     if (currentPlayer === "O") {
       console.log("o wins");
       oScoreUpdate += 1;
       winPage(PLAYERO_WON);
       oScore.html(oScoreUpdate);
+      return;
     } else if (currentPlayer === "X") {
       console.log("x wins");
       xScoreUpdate += 1;
       winPage(PLAYERX_WON);
       xScore.html(xScoreUpdate);
-    } 
+      return;
+    }
   }
-  if(!board.includes('')) {
+  if (!board.includes("")) {
+    console.log("its a tie");
     winPage(TIE);
   }
-};
-
-let winPage = function (resultType) {
-  switch (resultType) {
-    case PLAYERO_WON:
-      alert.html(
-        `Player <span class="playerO">O</span> Won. Click Restart button to play again`
-      ).show();
-      break;
-    case PLAYERX_WON:
-      alert.html(`Player <span class="playerX">X</span> Won. Click Restart button to play again`).show();
-      break;
-    case TIE:
-      alert.html(`It's a TIE. Click Restart button to play again`).show();
-  }
-  alert.removeClass(".hide");
 };
 
 //this function is to change the player between X and O
@@ -95,6 +100,7 @@ let newBoard = function (index) {
   board[index] = currentPlayer;
   console.log(board);
 };
+
 let playGame = function (index, cell) {
   if (keepPlaying) {
     $(cell).html(currentPlayer);
@@ -113,13 +119,7 @@ let playGame = function (index, cell) {
   }
 };
 
-cells.each(function (index, cell) {
-  $(cell).click(function () {
-    if ($(cell).is(":empty")) {
-      playGame(index, cell);
-    } else return;
-  });
-});
+//click restart button to reset everything but the score.
 restart.click(function () {
   alert.addClass("hide");
   board = ["", "", "", "", "", "", "", "", ""];
@@ -128,10 +128,7 @@ restart.click(function () {
   if (currentPlayer === "O") {
     changePlayer();
   }
-  // console.log(cells)
- 
-    cells.each(function (index, cell) {
-    console.log("the cell is", cell);
+  cells.each(function (index, cell) {
     $(cell).html("");
     $(cell).removeClass("playerX");
     $(cell).removeClass("playerO");
@@ -139,13 +136,36 @@ restart.click(function () {
   });
 });
 
-changeToAI.click(function() {
-    changeToAI.css("display","none");
-    changeToOriginal.removeClass("hide-ai");
-    doNothing();
-})
-changeToOriginal.click(function(){
-    changeToOriginal.addClass("hide-ai");
-    changeToAI.css("display","block")
+//click the title to change to AI
+changeToAI.click(function () {
+  changeToAI.css("display", "none");
+  changeToOriginal.removeClass("hide-ai");
+  aiCondition = true;
+  console.log("ai mode now");
+  AI();
+});
+//click again to change to the original mode
+changeToOriginal.click(function () {
+  changeToOriginal.addClass("hide-ai");
+  changeToAI.css("display", "block");
+  aiCondition = false;
+});
 
-})
+/*************************Implement AI*********************************/
+
+
+/**********************************************************/
+
+cells.each(function (index, cell) {
+  $(cell).click(function () {
+    if (aiCondition == false) {
+      if ($(cell).is(":empty")) {
+        playGame(index, cell);
+      } else return;
+    } else if (aiCondition == true) {
+      if ($(cell).is(":empty")) {
+        AI();
+      } else return;
+    }
+  });
+});

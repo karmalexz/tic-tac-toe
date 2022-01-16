@@ -13,6 +13,8 @@ let keepPlaying = true;
 let xScoreUpdate = 0;
 let oScoreUpdate = 0;
 let aiCondition = false;
+
+
 const PLAYERX_WON = "PLAYERX_WON";
 const PLAYERO_WON = "PLAYERO_WON";
 const TIE = "TIE";
@@ -27,6 +29,11 @@ const winCombo = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+function playClickSound() {
+  var clickAudio = document.getElementById("audio");
+  clickAudio.play();
+}
+// shows up win page based on each result type.
 let winPage = function (resultType) {
   switch (resultType) {
     case PLAYERO_WON:
@@ -49,21 +56,26 @@ let winPage = function (resultType) {
   alert.removeClass(".hide");
 };
 
+//this function is to check the win condition and shows up the winning page
 let result = function () {
   for (let i = 0; i < winCombo.length; i++) {
+    //looping to check which win combo satisfies.
     let winCondition = winCombo[i];
     let first = board[winCondition[0]];
     let second = board[winCondition[1]];
     let third = board[winCondition[2]];
     if (first === "" || second === "" || third === "") {
+      //if no 3 symbols in a row, keep playing
       console.log("keep playing");
       continue;
     } else if (first === second && second === third) {
+      //if there are 3 symbols in a row, stop playing
       keepPlaying = false;
       console.log("stop playing");
       break;
     }
   }
+  //check who the winner is and update score.
   if (keepPlaying == false) {
     if (currentPlayer === "O") {
       console.log("o wins");
@@ -96,11 +108,13 @@ let changePlayer = function () {
   displayPlayer.html(currentPlayer); //change the span of whose turn it is.
   displayPlayer.addClass(`player${currentPlayer}`); //add an additional class in order to change the colour of the span.
 };
+
+//update the board to check win condition later
 let newBoard = function (index) {
   board[index] = currentPlayer;
-  console.log(board);
 };
 
+//playGame()
 let playGame = function (index, cell) {
   if (keepPlaying) {
     $(cell).html(currentPlayer);
@@ -112,12 +126,11 @@ let playGame = function (index, cell) {
       display: "flex",
     }),
       $(cell).addClass(`player${currentPlayer}`);
-    console.log(index);
     newBoard(index);
     result();
     changePlayer();
   }
-};
+}; //playGame()
 
 //click restart button to reset everything but the score.
 restart.click(function () {
@@ -150,12 +163,7 @@ changeToOriginal.click(function () {
   changeToAI.css("display", "block");
   aiCondition = false;
 });
-
-/*************************Implement AI*********************************/
-
-
-/**********************************************************/
-
+//click each cell once to run the playGame function.
 cells.each(function (index, cell) {
   $(cell).click(function () {
     if (aiCondition == false) {
@@ -169,3 +177,6 @@ cells.each(function (index, cell) {
     }
   });
 });
+
+/*************************Implement AI*********************************/
+
